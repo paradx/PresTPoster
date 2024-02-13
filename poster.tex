@@ -1,5 +1,4 @@
 \documentclass[final]{beamer}
-
 % ====================
 % Packages
 % ====================
@@ -17,15 +16,22 @@
 \pgfplotsset{compat=1.18}
 \usepackage{anyfontsize}
 \usepackage[style=alphabetic,backend=biber]{biblatex}
+\addbibresource{poster.bib}
 \usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{setspace}
 % ====================
 % Lengths
 % ====================
+% 1.5 Zeilenabstand
+%\onehalfspacing%
 
 % If you have N columns, choose \sepwidth and \colwidth such that
 % (N+1)*\sepwidth + N*\colwidth = \paperwidth
+\newlength{\blocksep}
 \newlength{\sepwidth}
 \newlength{\colwidth}
+\setlength{\blocksep}{0.05\pageheight}
 \setlength{\sepwidth}{0.025\paperwidth}
 \setlength{\colwidth}{0.3\paperwidth}
 
@@ -35,7 +41,7 @@
 % Title
 % ====================
 
-\title{Land Use Change and Climate Component on \newline Urban Heat Islands Development}
+\title{Land Use Change and Climate Change Impact on \newline Urban Heat Islands Development}
 
 \author{Linus Andrae\inst{1}}
 
@@ -75,7 +81,47 @@
 
 % use this to include logos on the left and/or right side of the header:
 \logoright{\includegraphics[height=5cm]{logos/logo}}
-% \logoleft{\includegraphics[height=7cm]{logo2.pdf}}
+\logoleft{\includegraphics[height=5cm]{logos/logoIUP.png}}
+
+% ===================
+% Configuration of blocks
+% ==================
+
+\addtobeamertemplate{block begin}
+  {}
+  {\vspace{1ex plus 0.5ex minus 0.5ex} % Pads top of block
+     % separates paragraphs in a block
+   \setlength{\parskip}{24pt plus 1pt minus 1pt}%
+   \begin{adjustwidth}{2cm}{2cm}
+  }
+\addtobeamertemplate{block end}
+  {\end{adjustwidth}%
+   \vspace{2ex plus 0.5ex minus 0.5ex}}% Pads bottom of block
+  {\vspace{\blocksep}} % Seperates blocks from each other
+
+\addtobeamertemplate{block alerted begin}
+  {}
+  {\vspace{1ex plus 0.5ex minus 0.5ex} % Pads top of block
+     % separates paragraphs in a block
+   \setlength{\parskip}{24pt plus 1pt minus 1pt}%
+   \begin{adjustwidth}{2cm}{2cm}
+  }
+\addtobeamertemplate{block alerted end}
+  {\end{adjustwidth}%
+   \vspace{2ex plus 0.5ex minus 0.5ex}}% Pads bottom of block
+  {\vspace{\blocksep}} % Seperates blocks from each other
+
+\addtobeamertemplate{block example begin}
+  {}
+  {\vspace{1ex plus 0.5ex minus 0.5ex} % Pads top of block
+     % separates paragraphs in a block
+   \setlength{\parskip}{24pt plus 1pt minus 1pt}%
+   \begin{adjustwidth}{2cm}{2cm}
+  }
+\addtobeamertemplate{block example end}
+  {\end{adjustwidth}%
+   \vspace{2ex plus 0.5ex minus 0.5ex}}% Pads bottom of block
+  {\vspace{\blocksep}} % Seperates blocks from each other
 
 % ====================
 % Body
@@ -84,72 +130,51 @@
 \begin{document}
 
 \begin{frame}[t]
+\vspace{1em}
+\tikz[remember picture, overlay] \node[opacity=0.3, yshift=-15mm] at (current page.center){\includegraphics[width=\textwidth,height=0.99\textheight]{figures/overlay}};
 \begin{columns}[t]
-\separatorcolumn
+\separatorcolumn%
 
 \begin{column}{\colwidth}
 
-  \begin{block}{A block title}
+  \begin{block}{Abstract}
+    Urban Heat Islands are a phenomena where the temperature within a city is significantly higher within an urban area, compared to the temperature of the surrounding rural area. \\
+    Detection using remote sensing data is used frequently. 
+    This Work adapted and combined different methods, to measure the impact of land use/ land cover change and longer term temperature changes on Urban Heat Islands in different European cities.
+    
+  \end{block}
 
-    Some block contents, followed by a diagram, followed by a dummy paragraph.
+  \begin{exampleblock}{Processing Chain}
+   The Image Processing Pipeline can be separated in these steps:
+    \begin{itemize}
+      \item \textbf{Preprocessing} Cutting the image area to the Area of Interested
+      \item \textbf{Feature Engineering} A Gabor filter bank of rotated Gabor kernels is used to enrich pixels with information about there place in larger structures of the image
+      \item \textbf{Image Classification}  The pixels are classified using a random forest machine learning model that was trained using k-means based classification. 
+      \item \textbf{Urban Area Detection} Classes indicating Urban Areas are identified and the buffer zones are build up around the areas to calculate a reference temperature.
+      \item \textbf{Peri-Urban Area Clean-up} Larger structures of small settlements are masked away from the surrounding areas
+      \item \textbf{Detection of Urban Heat Islands} Using the Thermal Infrared channels of Landsat, Urban heat islands are detected within the Urban Area, using a minimum threshold above the rural surrounding area.
+      \item \textbf{Statistical Analysis of UHIs} Pixel within the UHI and around are evaluated using land surface type, NDVI and NDBI indicies
+      \item \textbf{Timeline Creation} Repeating this process for different images of the same area over multiple years, change in extend and size and statistical composition of the UHIs can be analysed. This allows an inside in the impact of urbanisation and change in surface type on UHIs.
+      \item \textbf{Climate Change Impact} Estimation of the imapact of rising average temperatures is done by substracting the statistically significant impact of metrological and surface change on the size of urban heat islands and correlating the UHI size with measurement from weather stations in the area in question.
+    \end{itemize}
+  \end{exampleblock}
 
-    \begin{figure}
+  \begin{block}{Feature Engineering}
+    
+     \begin{figure}
+       \begin{subfigure}{0.34\textwidth}
       \centering
-      \begin{tikzpicture}[scale=6]
-        \draw[step=0.25cm,color=gray] (-1,-1) grid (1,1);
-        \draw (1,0) -- (0.2,0.2) -- (0,1) -- (-0.2,0.2) -- (-1,0)
-          -- (-0.2,-0.2) -- (0,-1) -- (0.2,-0.2) -- cycle;
-      \end{tikzpicture}
-      \caption{A figure caption.}
+      \includegraphics[width=\textwidth]{figures/gabor}
+      \subcaption{Gabor Filter Bank~\cite{mediumgabor}} 
+    \end{subfigure}
+    \begin{subfigure}{0.34\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{figures/features}
+      \subcaption{Features extracted from an image of the city of Bremen}
+    \end{subfigure}
     \end{figure}
 
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies
-    eget libero ac ullamcorper. Integer et euismod ante. Aenean vestibulum
-    lobortis augue, ut lobortis turpis rhoncus sed. Proin feugiat nibh a
-    lacinia dignissim. Proin scelerisque, risus eget tempor fermentum, ex
-    turpis condimentum urna, quis malesuada sapien arcu eu purus.
-
   \end{block}
-
-  \begin{block}{A block containing a list}
-
-    Nam vulputate nunc felis, non condimentum lacus porta ultrices. Nullam sed
-    sagittis metus. Etiam consectetur gravida urna quis suscipit.
-
-    \begin{itemize}
-      \item \textbf{Mauris tempor} risus nulla, sed ornare
-      \item \textbf{Libero tincidunt} a duis congue vitae
-      \item \textbf{Dui ac pretium} morbi justo neque, ullamcorper
-    \end{itemize}
-
-    Eget augue porta, bibendum venenatis tortor.
-
-  \end{block}
-
-  \begin{alertblock}{A highlighted block}
-
-    This block catches your eye, so \textbf{important stuff} should probably go
-    here.
-
-    Curabitur eu libero vehicula, cursus est fringilla, luctus est. Morbi
-    consectetur mauris quam, at finibus elit auctor ac. Aliquam erat volutpat.
-    Aenean at nisl ut ex ullamcorper eleifend et eu augue. Aenean quis velit
-    tristique odio convallis ultrices a ac odio.
-
-    \begin{itemize}
-      \item \textbf{Fusce dapibus tellus} vel tellus semper finibus. In
-        consequat, nibh sed mattis luctus, augue diam fermentum lectus.
-      \item \textbf{In euismod erat metus} non ex. Vestibulum luctus augue in
-        mi condimentum, at sollicitudin lorem viverra.
-      \item \textbf{Suspendisse vulputate} mauris vel placerat consectetur.
-        Mauris semper, purus ac hendrerit molestie, elit mi dignissim odio, in
-        suscipit felis sapien vel ex.
-    \end{itemize}
-
-    Aenean tincidunt risus eros, at gravida lorem sagittis vel. Vestibulum ante
-    ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
-
-  \end{alertblock}
 
 \end{column}
 
