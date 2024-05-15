@@ -70,8 +70,9 @@
       https://github.com/paradx/PresTPoster/blob/main/poster.pdf?raw=true} \vspace{1cm}
     \end{column}
     \begin{column}{\colwidth}
+      \centering
       \vfill
-        Master Thesis \\ University Bremen \hfill
+        Summery of Master Thesis Results \\ Space Science and Technology M.Sc. \\ University Bremen \hfill
     \end{column}
     \separatorcolumn%
     \begin{column}{\colwidth}
@@ -163,7 +164,7 @@
   \begin{block}{Processing Chain}
    The Image Processing Pipeline can be separated in these steps:
     \begin{enumerate}
-      \setlength\itemsep{0.5em}
+      \setlength\itemsep{0.3em}
       \item \textbf{Preprocessing} Cutting the image area to the area of interested
       \item \textbf{Feature Engineering} A Gabor filter bank of rotated Gabor kernels is used to enrich pixels with information about surrounding pixel and larger structures.
       \item \textbf{Image Classification}  The pixels are classified using a k-means based classification. 
@@ -208,7 +209,7 @@
       \includegraphics[width=0.85\linewidth]{figures/Features_2_015_90.png}
       \subcaption{Features extracted from an image of the city of Bremen\label{fig:feats}}
     \end{subfigure}
-    \vspace{-0.2em}
+    \vspace{-0.4em}
     \caption{Gabor Filter kernels and convoluted image}
     \end{figure}
   \end{block}
@@ -219,15 +220,16 @@
 
   \begin{block}{Surface Classification}
     Using k-means the surface classes seen in \cref{fig:classes} were determined.
-    \vspace{-.6em}
+    \vspace{-0.7em}
     \begin{figure}
+      \centering
       \begin{subfigure}{0.9\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/Classification.png}
         \subcaption{Surface type classification of Bremen and the surrounding area\label{fig:classes}} 
       \end{subfigure}
 
-      \vspace{-0.2em}
+      \vspace{-0.5em}
       \begin{subfigure}{0.9\textwidth}
         \centering
       \includegraphics[width=0.8\textwidth]{figures/UrbanAreaBremen.png}
@@ -237,7 +239,7 @@
     \caption{Classification and urban area detection results}
   \end{figure}
   The urban pixels were merged into a continuous urban area with suburban and rural influence zones (\cref{fig:urban}).\\
-  \vspace{-1.5em}
+  \vspace{-2.0em}
   \begin{tikzpicture}
    \node[overlay, style=single arrow, fill=UHBRed, shape border rotate=270, minimum width=3cm, minimum height=2.6cm, yshift=-2.5cm, xshift=0.5\linewidth]{};
   \end{tikzpicture}
@@ -252,7 +254,7 @@
    \node[overlay, style=single arrow, fill=UHBRed, shape border rotate=270, minimum width=3cm, minimum height=2.6cm, yshift=1.8cm ,xshift=0.5\colwidth]{};
 \end{tikzpicture}
   
-\vspace{0.5em}
+\vspace{0.4em}
   \begin{block}{UHI Detection}
   \begin{figure}
       \centering
@@ -261,7 +263,7 @@
   \end{figure}
   \end{block}
 
-\vspace{0.5em}
+\vspace{0.4em}
   \begin{tikzpicture}
     \node[overlay, style=single arrow, fill=UHBRed, shape border rotate=270, minimum width=3cm , minimum height=2.6cm, yshift=2.5cm ,xshift=0.5\colwidth]{};
   \end{tikzpicture}
@@ -272,12 +274,13 @@
         \includegraphics[width=\linewidth]{figures/ClassDistributionPU2019-06-29.png}
         \caption{Statistical analysis of the Bremen surface type distribution within the peri urban area}
     \end{figure}
+\vspace{-0.4em}
     \begin{itemize}
-      \setlength\itemsep{0.5em}
-      \item City area classification works well with a combined approach
-      \item Detecting Surface UHIs works well in different latitudes using Landsat 8 Satellite Images
+      \setlength\itemsep{0.4em}
+      \item City area classification works well with the used approach
+      \item Detecting surface UHIs works well using Landsat 8 satellite images
       \item Severity depends highly on surface type and weather
-      \item Climate Change and timeline analysis are currently a Work in Process (master thesis)
+      \item An increase in temperatures can be observed in cities at higher latitudes like Bremen
     \end{itemize}
   \end{block}
 
@@ -286,22 +289,21 @@
  %     \item Time Line
  %   \end{itemize}
  % \end{block}
-
+  \vspace{-1.5cm}
   \begin{alertblock}{Summery}
     \begin{itemize}
       \setlength\itemsep{0.5em}
-      \item Remote Sensing Data can Help with detection and monitoring of UHIs
-      \item UHIs pose a severe health risk
-      \item UHIs pose a severe environmental risk
-      \item Impact on humans will get worse with increased average temperatures
-      \item Mitigation needs multidisciplinary approach
+      \item Remote sensing data can help with detection and monitoring of UHIs
+      \item UHI increase in size and merge to larger scale structures with increased mean temperature
+      \item Maximum temperature of UHI is not increasing as strongly 
+      \item More studies need to be conducted, using multiple datasets for statistical analysis
     \end{itemize}
   \end{alertblock}
 
+  \vspace{-1.5cm}
   \begin{block}{Reference}
-    Read the full work here:\\
-      %\href{https://github.com/paradx/mscthesis/releases/download/printed/thesis_singleSided.pdf}{https://github.com/paradx/mscthesis/releases/download/printed/thesis_singleSided.pdf}
-       \vspace{1cm}
+    Read the Thesis here:\\
+      \href{https://github.com/paradx/mscthesis/releases/download/printed/thesis\_singleSided.pdf?raw=true}{https://github.com/paradx/mscthesis/releases/download/printed/thesis\_singleSided.pdf?raw=true}
 %    \nocite{*}
 %    \footnotesize{\printbibliography}
   \end{block}
